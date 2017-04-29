@@ -1,0 +1,23 @@
+		
+		
+		org.apache.lucene.search.Query query = qb.range()
+												.onField("starred")
+												.from(0).to(3)
+												.excludeLimit()
+												.createQuery();
+		look for 0 <= starred < 3
+		
+		
+		org.apache.lucene.search.Query query = qb.range()
+												.onField("dateOfBirth")
+												.above(lastDate)
+												.excludeLimit()
+												.createQuery();
+				
+		org.apache.lucene.search.Query query = qb.range()
+												.onField("dateOfBirth")
+												.before(firstDate)
+												.excludeLimit()
+												.createQuery();
+		
+		zaman belirleme su tarihten kucuk bu tarihten büyük gibi

@@ -1,0 +1,11 @@
+		
+		
+		
+		org.apache.lucene.search.Query query = qb.phrase()
+										.onField("criteria")
+										.sentence("java bilen")
+										.createQuery();
+		
+		
+		bir cümlenin bazý kýsýmlarýný yazarak arama
+		ben begenmedim.

@@ -1,0 +1,7 @@
+		
+		
+		
+		javax.persistence.Query persistenceQuery = fullTextEntityManager.createFullTextQuery(query, Student.class);
+		persistenceQuery.setFirstResult(15); // start from 15th element
+		persistenceQuery.setMaxResults(10);	//return 10 element
+		

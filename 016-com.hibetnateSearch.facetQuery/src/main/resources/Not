@@ -1,0 +1,86 @@
+	
+	
+	Kategorilere ayýrmak için kaç tane iþ ilaný var cýktýsýný alýyoruz.
+	
+	dergiler (2)
+		
+		Ferhat dergiler
+		Burak dergiler
+	
+	kitaplar (1)
+		
+		Ahmet kitaplar
+	
+	bilgisayarlar (1)
+		
+		Baki bilgisayarlar
+	
+	
+	
+		org.apache.lucene.search.Query query = qb
+												.all()
+												.createQuery();
+												
+		FacetingRequest facetingRequest = qb
+											.facet()
+											.name("emailCategory")
+											.onField("email")
+											.discrete()
+											.orderedBy(FacetSortOrder.COUNT_DESC)
+											.includeZeroCounts(false)
+											.createFacetingRequest();
+		
+		FullTextQuery fullTextQuery = fullTextEntityManager.createFullTextQuery(query, Student.class);
+	
+		FacetManager facetManager = fullTextQuery.getFacetManager();
+		facetManager.enableFaceting(facetingRequest);
+
+		List<Facet> facets = facetManager.getFacets("emailCategory");
+		
+		for(Facet f : facets){
+			
+			System.out.println(f.getValue() +  " (" + f.getCount() + ")");
+			
+			@SuppressWarnings("unchecked")
+			List<Student> students = fullTextEntityManager.createFullTextQuery(f.getFacetQuery(), Student.class).getResultList();
+			
+			for(Student s : students){
+				
+				System.out.println("\t" + s.getFirstName() + " " + s.getEmail());
+			}
+			
+		}
+		
+		---------------------------------------------------------------------------------------------------------------------------------------
+		
+		facet.getValue() - > kac tane eleman oludugunu verir.
+		
+		FacetingRequest priceFacetingRequest = builder.facet()
+												.name("priceFaceting").onField("price").range().below(20)
+												.from(30).to(40).from(40).to(50).above(50).excludeLimit()
+												.orderedBy(FacetSortOrder.RANGE_DEFINITION_ODER)
+												.createFacetingRequest();
+	
+		Query luceneQuery = builder.all().createQuery();
+	
+		org.hibernate.search.jpa.FullTextQuery fullTextQuery = fullTextEntityManager.createFullTextQuery(luceneQuery);
+		
+		FacetManager facetManager = fullTextQuery.getFacetManager();
+	
+		facetManager.enableFaceting(priceFacetingRequest);
+ 
+		List<Facet> facets = facetManager.getFacets("priceFaceting");
+	
+		for (Facet f : facets) {
+			
+			System.out.println("Price range: " + f.getValue() + " ("
+				
+					+ f.getCount() + ")");
+		}
+		
+		Price range: 20 (3)
+		Price range: 30, 40 (1)
+		Price range: 40, 50 (0)
+		Price range: 50 (2)
+		
+		

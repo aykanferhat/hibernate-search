@@ -1,0 +1,14 @@
+
+
+
+
+
+@TokenFilterDef(factory = NGramFilterFactory.class, params = {
+						@Parameter(name = "minGramSize", value = "3"),
+						@Parameter(name = "maxGramSize", value = "3")
+				})
+				
+				
+				bu analyzer kullanan property 3'er haneli parcalara bölünerek indexlenir.
+				
+				ferhat -> fer erh rha hat seklinde parcalanabilinir. aramalarda tam arama yapabiliriz.

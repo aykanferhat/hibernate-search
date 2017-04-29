@@ -1,0 +1,8 @@
+Anlyzer 
+
+	Let’s make things a little more interesting now. Assume that one of your indexed book entities
+	has the title "Refactoring: Improving the Design of Existing Code" and you want to get hits for all
+	of the following queries: "refactor", "refactors", "refactored" and "refactoring". In Lucene this
+	can be achieved by choosing an analyzer class which applies word stemming during the indexing
+	as well as the search process.
+	

@@ -1,0 +1,11 @@
+		
+		
+		
+		org.apache.lucene.search.Query query = qb.keyword()
+										.wildcard()
+										.onField("lastName")
+										.matching("de*")
+										.createQuery();
+		
+		
+		soyisim kýsmýnda baslangýcý de ile baslayan satirlari getir.

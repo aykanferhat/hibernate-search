@@ -1,0 +1,30 @@
+		
+		
+		Structure of a boolean AND query: the must method.
+		
+		org.apache.lucene.search.Query query = qb
+												.bool()
+												.must( QueryA )
+												.must( QueryB )
+												.createQuery();
+		
+		iki sorgunun kesiþimini alýyor.									
+		org.apache.lucene.search.Query query = qb
+												.bool()
+												.must( qb.keyword().onField("criteria").matching("java").createQuery())
+												.must( qb.range().onField("dateOfBirth").below(createDate(22, 1, 1997)).excludeLimit().createQuery())
+												.createQuery();										
+		
+		
+		veya iliþkisi var. her iki sorgunun sonucuda birleþtirilip getiriliyor.					
+		org.apache.lucene.search.Query query = qb
+												.bool()
+												.should( qb.keyword().onField("criteria").matching("bilen").createQuery())
+												.should( qb.range().onField("dateOfBirth").above(createDate(22, 1, 1999)).excludeLimit().createQuery())
+												.createQuery();		
+		
+		- Aranan dýþýndaki tüm sonuclarý getir.									
+		org.apache.lucene.search.Query query = qb
+												.all()
+												.except(qb.keyword().onField("criteria").matching("bilen").createQuery())
+												.createQuery();
